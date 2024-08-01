@@ -9,6 +9,15 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
+  <nav>
+  <% if user_signed_in? %>
+    <%= "こんにちは#{current_user.email}さん"  %>
+    <%= button_to 'Exit', destroy_user_session_path, method: :delete %>
+  <% else %>
+    <%= link_to 'サインアップ', new_user_registration_path %>
+    <%= link_to 'ログイン', new_user_session_path %>
+  <% end %>
+</nav>
 
   <body>
     <%= yield %>
