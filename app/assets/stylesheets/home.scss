@@ -1,3 +1,110 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.FirstView {
+  background-image: url(https://rails-02-sample.herokuapp.com/assets/home/cover-lg.jpg);
+  background-size: cover;
+  background-position: 50%;
+  height: 750px;
+  margin-bottom: 180px;
+  padding-top: 80px;
+  width: 100%;
+}
+
+.FirstView__title {
+  color: white;
+  font-family: Lato, sans-serif;
+  font-size: 84px;
+  font-weight: 400;
+  line-height: 101px;
+  margin-bottom: 48px;
+  text-align: center;
+  word-break: keep-all;
+}
+
+
+.FirstViewSearch {
+  max-width: 600px; 
+  margin: 0 auto; 
+  padding: 20px; 
+  background-color: #f9f9f9; 
+  border-radius: 8px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+
+
+.FirstViewSearch__input {
+  width: 100%; 
+  padding: 10px; 
+  font-size: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+  margin-bottom: 10px; 
+}
+
+
+.FirstViewSearch__button {
+  display: inline-block; 
+  padding: 10px 20px;
+  font-size: 16px; 
+  color: #fff; 
+  background-color: #007bff; 
+  border: none; 
+  border-radius: 4px;
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+}
+
+
+.FirstViewSearch__button:hover {
+  background-color: #0056b3; 
+}
+
+.RecommendArea--tokyo {
+  background-image: url(https://rails-02-sample.herokuapp.com/assets/home/recommend-area/tokyo.jpg);
+}
+
+.RecommendArea--osaka {
+  background-image: url(https://rails-02-sample.herokuapp.com/assets/home/recommend-area/osaka.jpg);
+}
+
+.RecommendArea--kyoto {
+  background-image: url(https://rails-02-sample.herokuapp.com/assets/home/recommend-area/kyoto.jpg);
+}
+
+.RecommendArea--sapporo {
+  background-image: url(https://rails-02-sample.herokuapp.com/assets/home/recommend-area/sapporo.jpg);
+}
+
+.RecommendAreas {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  grid-gap: 32px;
+  gap: 32px;
+}
+
+
+
+.RecommendArea {
+  background-size: cover;
+  background-position: 50%;
+  border-radius: 26px;
+  display: flex;
+  flex-direction: column;
+  height: 455px;
+  justify-content: flex-end;
+  padding: 40px 24px;
+  width: calc(25% - 24px);
+}
+
+a {
+  color: #0071c1;
+  text-decoration: none;
+}
+
+*, ::after, ::before {
+  box-sizing: border-box;
+}
