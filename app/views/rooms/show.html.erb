@@ -1,0 +1,35 @@
+<h1><%= @room.name %></h1>
+
+<% if @room.image.present? %>
+  <%= image_tag @room.image.url, alt: @room.name %>
+<% else %>
+  <%= image_tag 'default-image.room.png', alt: 'デフォルト画像' %>
+<% end %>
+
+<p>
+  <strong>施設名:</strong>
+  <%= @room.name %>
+</p>
+
+<p>
+  <strong>施設詳細:</strong>
+  <%= @room.description %>
+</p>
+
+<p>
+  <strong>宿泊料金:</strong>
+  <%= @room.price %>
+</p>
+
+<p>
+  <strong>住所:</strong>
+  <%= @room.address %>
+</p>
+
+<p>
+  <strong>作成日:</strong>
+  <%= @room.created_at.to_s(:datetime_jp) %>
+</p>
+
+<%= link_to '編集', edit_room_path(@room) %> |
+<%= link_to '戻る', rooms_path %>

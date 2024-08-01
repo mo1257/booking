@@ -1,0 +1,48 @@
+<h1>検索結果</h1>
+
+<!-- 検索フォームの追加 -->
+<div class="search-form">
+  <%= form_with url: search_rooms_path, method: :get, local: true do %>
+    <div class="form-group">
+      <label for="area">エリア:</label>
+      <%= text_field_tag :area, params[:area], placeholder: "エリア名を入力", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <label for="keyword">フリーワード:</label>
+      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード名を入力", class: "form-control" %>
+    </div>
+
+    <%= submit_tag "検索", class: "btn btn-primary" %>
+  <% end %>
+</div>
+
+<!-- 検索結果の表示 -->
+<p>検索結果: <%= @rooms.count %> 件</p>
+
+<% if @rooms.empty? %>
+  <p>検索条件に一致する施設はありません。</p>
+<% else %>
+  <table>
+    <thead>
+      <tr>
+        <th>施設名</th>
+        <th>住所</th>
+        <th>詳細</th>
+        <th>宿泊料金（/日）</th>
+        <th>詳細リンク</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= room.title %></td>
+          <td><%= room.address %></td>
+          <td><%= room.description %></td>
+          <td><%= number_to_currency(room.price) %></td>
+          <td><%= link_to '詳細', room_path(room) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
