@@ -1,0 +1,137 @@
+/* ヘッダー */
+.header {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-sizing: border-box; /* ボックスサイズを調整して、パディングが幅に含まれるように */
+}
+
+/* ロゴ */
+.header-logo a {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  margin-right: 20px; /* ロゴとドロップダウンメニューの間にスペースを追加 */
+}
+
+/* ヘッダー内のコンテンツ */
+.header-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* ヘッダー内の内容に最大幅を設定 */
+  margin: 0 auto; /* 中央揃え */
+}
+
+/* ヘッダーリスト（ログイン時、ユーザー情報とドロップダウンメニュー） */
+.header-list {
+  display: flex;
+  align-items: center;
+}
+
+/* ユーザー情報 */
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+/* ユーザーアバター */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px; /* ユーザーアバターとドロップダウンメニューの間にスペースを追加 */
+}
+
+/* ドロップダウンメニュー */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* ドロップダウンボタン */
+.dropbtn {
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 10px; /* ドロップダウンメニューとユーザーアバターの間にスペースを追加 */
+}
+
+/* ドロップダウンメニューの内容 */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  right: 0; /* ドロップダウンメニューが親要素の右に表示されるように */
+}
+
+/* ドロップダウンメニューのリンク */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* ドロップダウンメニューのリンクホバー */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* ドロップダウンボタンホバーでメニューを表示 */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* ドロップダウンボタンホバーで背景色を変更 */
+.dropdown:hover .dropbtn {
+  background-color: #555;
+}
+
+/* 認証リンク */
+.auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.auth-links a {
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+}
+
+.auth-links a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+/* メインコンテンツ */
+.main {
+  padding: 70px 20px 20px; /* ヘッダーの高さ分スペースを確保 */
+}
+
+/* フッター */
+
+.footer {
+  background-color: #333; /* フッターの背景色 */
+  color: #fff; /* テキスト色 */
+  align-items: center;
+  display: flex;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 軽いシャドウ */
+  height: 465px;
+}

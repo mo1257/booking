@@ -1,0 +1,39 @@
+<div class="table-responsive">
+    <table class="table align-middle ReservationsTable">
+      <thead>
+        <tr>
+          <th>画像</th>
+          <th>施設名</th>
+          <th>紹介文</th>
+          <th class="text-nowrap">合計料金</th>
+          <th class="text-nowrap">チェックイン</th>
+          <th class="text-nowrap">チェックアウト</th>
+          <th class="text-nowrap">予約確定日時</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+        <td>
+        <% if reservation.room.image.present? %>
+          <%= image_tag reservation.room.image.url, alt: reservation.room.name, size: "100x100" %>
+        <% else %>
+          <%= image_tag asset_path('default-image.room.png'), alt: 'デフォルト画像', size: "100x100" %>
+        <% end %>
+      </td>
+          <td><%= reservation.user.name %></td>
+          <td><%= reservation.room.name %></td>
+          <td><%= reservation.check_in_date %></td>
+          <td><%= reservation.check_out_date %></td>
+          <td><%= link_to '表示', reservation %></td>
+          <td><%= link_to '編集', edit_reservation_path(reservation) %></td>
+          <td><%= link_to '削除', reservation, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <%= link_to '再予約', new_reservation_path %>
+  </div>
+</div>

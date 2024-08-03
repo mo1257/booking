@@ -1,5 +1,4 @@
 # app/controllers/rooms_controller.rb
-
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show, :search]
 

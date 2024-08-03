@@ -1,0 +1,19 @@
+<h1>予約詳細</h1>
+<p>
+  <strong>ユーザー:</strong>
+  <%= @reservation.user.name %>
+</p>
+<p>
+  <strong>施設:</strong>
+  <%= @reservation.room.name %>
+</p>
+<p>
+  <strong>チェックイン日:</strong>
+  <%= @reservation.check_in_date %>
+</p>
+<p>
+  <strong>チェックアウト日:</strong>
+  <%= @reservation.check_out_date %>
+</p>
+<%= link_to '編集', edit_reservation_path(@reservation) %>
+<%= link_to '戻る', reservations_path %>

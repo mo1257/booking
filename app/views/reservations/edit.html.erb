@@ -1,0 +1,36 @@
+<!-- app/views/reservations/edit.html.erb -->
+
+<h1>予約の編集</h1>
+
+<%= form_with(model: @reservation, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :room_id, "施設" %>
+    <%= form.collection_select :room_id, Room.all, :id, :name, prompt: "選択してください" %>
+  </div>
+  
+
+
+  <div class="field">
+    <%= form.label :start_date, "チェックイン" %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date, "チェックアウト" %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :room_image, "施設画像" %>
+    <% if @reservation.room.image.present? %>
+      <%= image_tag @reservation.room.image.url, alt: @reservation.room.name, size: "150x150" %>
+    <% else %>
+      <%= image_tag asset_path('default-image.room.png'), alt: 'デフォルト画像', size: "150x150" %>
+    <% end %>
+
+  <div class="actions">
+    <%= form.submit "更新する" %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', reservation_path(@reservation) %>
