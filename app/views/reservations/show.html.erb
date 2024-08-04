@@ -1,4 +1,13 @@
 <h1>予約詳細</h1>
+
+<% if @reservation.image.present? %>
+  <%= image_tag @reservation.image.url, class: "reservation-image" %>
+<% else %>
+  <%= image_tag "fallback/room.jpg", class: "reservation-image" %> <!-- デフォルト画像 -->
+<% end %>
+
+
+
 <p>
   <strong>ユーザー:</strong>
   <%= @reservation.user.name %>
