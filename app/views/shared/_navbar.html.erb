@@ -1,32 +1,31 @@
-<div class="header">
-      <div class="header-logo"><a href="/">HotelBooking</a></div>
-      <div class="header-list">
-        <div class="container">
-          <div class="header-content">
-            <% if user_signed_in? %>
-              <div class="user-info">
-                <% if current_user.avatar.present? %>
-                  <%= image_tag current_user.avatar.url, alt: 'User Avatar', class: 'user-avatar' %>
-                <% else %>
-                  <%= image_tag @user.avatar.url, class: 'rounded-circle mr15', size:"50x50" %>
-                <div class="dropdown">
-                  <button class="dropbtn"><%= current_user.name %></button>
-                  <div class="dropdown-content">
-                    <%= link_to 'アカウント設定', user_path(current_user) %>
-                    <%= link_to '部屋の新規登録', new_room_path %>
-                    <%= link_to '予約済み一覧', reservations_path %> 
-                    <%= link_to '登録済み一覧', rooms_path %>
-                    <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-                  </div>
-                </div>
-              </div>
-            <% else %>
-              <div class="auth-links">
-                 <%= link_to 'サインアップ', new_user_registration_path %>
-                 <%= link_to 'ログイン', new_user_session_path %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
+<header class="header">
+  <nav class="header-content">
+    <div class="header-logo">
+      <a href="/">HotelBooking</a>
     </div>
+    <ul class="header-nav">
+      <% if user_signed_in? %>
+        <li class="dropdown">
+          <% if current_user.avatar.present? %>
+            <%= image_tag current_user.avatar.url, class: "user-avatar" %>
+          <% else %>
+            <%= image_tag "fallback/default.jpg", class: "user-avatar" %>
+          <% end %>
+          <%= link_to "#", class: "dropdown-toggle", id: "user-name" do %>
+            <%= current_user.name %>
+          <% end %>
+          <ul class="dropdown-menu">
+            <li><%= link_to "プロフィール", edit_user_registration_path %></li>
+            <li><%= link_to "施設の新規登録", new_room_path %></li>
+            <li><%= link_to "予約済み一覧", reservations_path %></li>
+            <li><%= link_to "登録済み一覧", rooms_path %></li>
+            <li><%= button_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+          </ul>
+        </li>
+      <% else %>
+        <li><%= link_to "ログイン", new_user_session_path %></li>
+        <li><%= link_to "新規登録", new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </nav>
+</header>

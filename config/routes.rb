@@ -12,4 +12,6 @@ Rails.application.routes.draw do
   end
   #
   resources :rooms
+  #
+  resources :reservations
 end

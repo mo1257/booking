@@ -1,4 +1,4 @@
-class AvatarUploader < CarrierWave::Uploader::Base
+class FacilityImageUploader < CarrierWave::Uploader::Base
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -18,10 +18,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
   
   def default_url(*args)
-    "assets/images/fallback/" + [version_name, "default.jpg"].compact.join('_')
+    "assets/images/fallback/" + [version_name, "room.jpg"].compact.join('_')
   end
-
-  
 
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
