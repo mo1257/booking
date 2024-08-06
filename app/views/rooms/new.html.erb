@@ -2,9 +2,9 @@
 
 <h1>新規施設登録</h1>
 
-<%= form_with(model: @room, local: true) do |form| %>
+<%= form_with(model: @room, local: true, html: { class: 'room-form' }) do |form| %>
   <% if @room.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="alert alert-danger">
       <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
       <ul>
         <% @room.errors.full_messages.each do |message| %>
@@ -14,34 +14,34 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="form-group">
+    <%= form.label :name, class: 'form-label' %>
+    <%= form.text_field :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: 'form-label' %>
+    <%= form.text_area :description, class: 'form-control', rows: 5 %>
   </div>
 
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
+  <div class="form-group">
+    <%= form.label :price, class: 'form-label' %>
+    <%= form.number_field :price, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+  <div class="form-group">
+    <%= form.label :address, class: 'form-label' %>
+    <%= form.text_field :address, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :image, "施設画像" %>
-    <%= form.file_field :image %>
+  <div class="form-group">
+    <%= form.label :image, "施設画像", class: 'form-label' %>
+    <%= form.file_field :image, class: 'form-control-file' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit "登録" %>
+  <div class="form-group">
+    <%= form.submit "登録", class: 'btn btn-primary' %>
   </div>
 <% end %>
 
-<%= link_to '一覧に戻る', rooms_path %>
+<%= link_to '一覧に戻る', rooms_path, class: 'btn btn-secondary' %>

@@ -1,3 +1,104 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.UserSection {
+  padding-top: 40px;
+  padding-bottom: 160px;
+}
+
+.container, .container-fluid {
+  max-width: 1440px;
+  padding: 0 32px;
+}
+
+.UserContainer {
+  display: flex;
+  grid-gap: 32px;
+  gap: 32px;
+  justify-content: space-between;
+}
+
+.SideNavigation {
+  background-color: #fff;
+  border: 1px solid #dfe2e6;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 336px;
+}
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+dl, ol, ul {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.SideNavigation__item:first-of-type {
+  border-bottom: 1px solid #dfe2e6;
+}
+
+.SideNavigation__item {
+  padding: 20px 24px;
+}
+
+.SideNavigation__item.active>a {
+  color: #ff7757;
+}
+
+.AccountInformation {
+  background-color: #fff;
+  width: calc(100% - 32px);
+}
+
+.TabNavigation {
+  display: none;
+}
+
+.AccountInformation__header {
+  align-items: center;
+  border-bottom: 1px solid #dfe2e6;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+}
+
+.AccountInformation__link {
+  display: flex;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 30px;
+}
+
+a {
+  color: #0071c1;
+  text-decoration: none;
+}
+
+.AccountInformation__input-group {
+  align-items: center;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.AccountInformation__label {
+  color: #333;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  width: 25%;
+}
+
+.AccountInformation__value {
+  margin-bottom: 0;
+  width: 75%;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}

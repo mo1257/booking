@@ -1,3 +1,78 @@
 // Place all the styles related to the Reservations controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.FromWrapper {
+  display: flex;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 40px 0 180px;
+}
+
+.FormContainer {
+  background-color: #fff;
+  border-radius: 12px;
+  margin: auto;
+  width: 702px;
+}
+
+.ReservationConfirm__value-group {
+  align-items: baseline;
+  display: flex;
+  font-size: 16px;
+  justify-content: space-between;
+  line-height: 26px;
+  margin-bottom: 24px;
+}
+
+.ReservationConfirm__label {
+  font-weight: 700;
+}
+
+.ReservationConfirm__label, .ReservationConfirm__value {
+  margin-bottom: 0;
+}
+
+.ReservationConfirm__value--price {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+}
+
+.ReservationConfirm__description {
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.ReservationConfirm__button--submit {
+  background-color: #ff7757;
+  color: #fff;
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
+
+.ReservationConfirm__button {
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  height: 58px;
+  font-size: 18px;
+  width: 100%;
+}
+
+.ReservationConfirm__button--cancel {
+  border: 1px solid #e0e0e0;
+  color: #6a6a6a;
+  line-height: 44px;
+}
+
+.ReservationConfirm__button {
+  align-items: center;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  height: 58px;
+  font-size: 18px;
+  width: 100%;
+}

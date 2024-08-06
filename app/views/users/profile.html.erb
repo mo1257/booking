@@ -1,0 +1,55 @@
+<section class="container UserSection">
+  <h2>設定</h2>
+  <div class="UserContainer">
+    <ul class="SideNavigation">
+      <li class="SideNavigation__item ">
+        <a href="/user/account">アカウント</a>
+      </li>
+
+      <li class="SideNavigation__item active">
+        <a href="/user/profile">プロフィール</a>
+      </li>
+    </ul>
+
+    <div class="AccountInformation">
+      <ul class="TabNavigation">
+          <li class="TabNavigation__item ">
+          <a href="/user/account">アカウント</a>
+        </li>
+
+        <li class="TabNavigation__item active">
+          <a href="/user/profile">プロフィール</a>
+        </li>
+      </ul>
+
+      <div class="AccountInformation__header">
+        <h3>プロフィール</h3>
+        <a class="AccountInformation__link" href="<%= profile_edit_path %>">
+        <img alt="編集アイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/edit-blue-51638a3e490277aa2df5f37102d45f5fcdfd8cd6c58fc5add90a958fab5c45af.svg" />
+        編集
+        </a>
+      </div>
+
+      <div class="AccountInformation__input-group">
+        <label class="AccountInformation__label" for="image">アイコン画像</label>
+        <p class="AccountInformation__value AccountInformation__value--image">
+          <%= image_tag "fallback/default.jpg", class: "user-avatar", size: "45x45" %>
+        </p>
+      </div>
+
+      <div class="AccountInformation__input-group">
+        <label class="AccountInformation__label" for="name">名前</label>
+        <p class="AccountInformation__value">
+          <%= current_user.name %>
+        </p>
+      </div>
+
+      <div class="AccountInformation__input-group">
+        <label class="AccountInformation__label" for="introduction">自己紹介</label>
+        <p class="AccountInformation__value">
+          <%= current_user.introduction %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

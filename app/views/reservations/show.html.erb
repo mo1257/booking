@@ -1,3 +1,5 @@
+<!-- app/views/reservations/show.html.erb -->
+
 <h1>予約詳細</h1>
 
 <% if @reservation.image.present? %>
@@ -5,8 +7,6 @@
 <% else %>
   <%= image_tag "fallback/room.jpg", class: "reservation-image" %> <!-- デフォルト画像 -->
 <% end %>
-
-
 
 <p>
   <strong>ユーザー:</strong>
@@ -18,11 +18,21 @@
 </p>
 <p>
   <strong>チェックイン日:</strong>
-  <%= @reservation.check_in_date %>
+  <%= @reservation.check_in.to_s(:custom) %>
 </p>
 <p>
   <strong>チェックアウト日:</strong>
-  <%= @reservation.check_out_date %>
+  <%= @reservation.check_out.to_s(:custom) %>
 </p>
+
+<p>
+  <strong>予約確定日時:</strong>
+  <% if @reservation.confirmation_date.present? %>
+    <%= @reservation.confirmation_date.to_s(:custom) %>
+  <% else %>
+    確定日時未定
+  <% end %>
+</p>
+
 <%= link_to '編集', edit_reservation_path(@reservation) %>
 <%= link_to '戻る', reservations_path %>

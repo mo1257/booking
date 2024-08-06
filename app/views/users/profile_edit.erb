@@ -1,0 +1,25 @@
+<h2>プロフィール</h2>
+
+<%= form_with model: @user do |f| %>
+
+  <div class="field">
+    <%= f.label :画像アップロード %><br />
+    <%= image_tag "fallback/default.jpg", class: "user-avatar", width: '70', height: '70' %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ユーザー名 %><br />
+    <%= f.text_field :name %>
+  </div>
+
+  <div claa="field">
+    <%= f.label :自己紹介 %><br />
+    <%= f.text_area :introduction %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "保存" %>
+    <%= link_to "戻る", :back %><br/>
+  </div>
+<% end %>

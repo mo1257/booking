@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_08_04_134919) do
+ActiveRecord::Schema.define(version: 2024_08_06_082803) do
 
   create_table "reservations", force: :cascade do |t|
     t.date "check_in"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 2024_08_04_134919) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.boolean "confirmed", default: false, null: false
+    t.datetime "confirmation_date"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.integer "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["room_id"], name: "index_reviews_on_room_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -34,6 +45,8 @@ ActiveRecord::Schema.define(version: 2024_08_04_134919) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "image"
+    t.string "area"
+    t.text "info"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
@@ -47,9 +60,11 @@ ActiveRecord::Schema.define(version: 2024_08_04_134919) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "avatar"
     t.string "name"
+    t.text "introduction"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "reviews", "rooms"
   add_foreign_key "rooms", "users"
 end

@@ -1,48 +1,41 @@
-<h1>検索結果</h1>
-
-<!-- 検索フォームの追加 -->
-<div class="search-form">
-  <%= form_with url: search_rooms_path, method: :get, local: true do %>
-    <div class="form-group">
-      <label for="area">エリア:</label>
-      <%= text_field_tag :area, params[:area], placeholder: "エリア名を入力", class: "form-control" %>
-    </div>
-
-    <div class="form-group">
-      <label for="keyword">フリーワード:</label>
-      <%= text_field_tag :keyword, params[:keyword], placeholder: "キーワード名を入力", class: "form-control" %>
-    </div>
-
-    <%= submit_tag "検索", class: "btn btn-primary" %>
-  <% end %>
+<div class="RoomDetailContainer">
+  <form class="SearchRoomsForm">
+    <%= search_form_for @q, url: search_rooms_path, method: :get do |f| %>
+      <div class="SearchRoomsForm__input-group--area">
+        <%= f.search_field :address_cont, class: "SearchRoomsForm__input", placeholder: 'エリア名を入力' %>
+      </div>
+      <div>
+        <%= f.search_field :info_cont, class: "SearchRoomsForm__input", placeholder: 'キーワード名を入力' %>
+      </div>
+      <%= f.submit '検索', class: "SearchRoomsForm__button Button FirstViewSerchButton" %>
+    <% end %>
+  </form>
 </div>
 
-<!-- 検索結果の表示 -->
-<p>検索結果: <%= @rooms.count %> 件</p>
-
-<% if @rooms.empty? %>
-  <p>検索条件に一致する施設はありません。</p>
-<% else %>
-  <table>
-    <thead>
-      <tr>
-        <th>施設名</th>
-        <th>住所</th>
-        <th>詳細</th>
-        <th>宿泊料金（/日）</th>
-        <th>詳細リンク</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @rooms.each do |room| %>
-        <tr>
-          <td><%= room.title %></td>
-          <td><%= room.address %></td>
-          <td><%= room.description %></td>
-          <td><%= number_to_currency(room.price) %></td>
-          <td><%= link_to '詳細', room_path(room) %></td>
-        </tr>
+<section class="RoomsContainer">
+  <ul class="RoomList">
+    <% if @results.present? %>
+      <% @results.each do |r| %>
+        <li class="Room">
+          <% if r.image.present? %>
+            <%= image_tag r.image.url, class: "RoomImage" %>
+          <% else %>
+            <%= image_tag "fallback/room.jpg", class: "RoomImage", alt: 'デフォルト画像' %>
+          <% end %>
+          <div class="RoomBody">
+            <p class="RoomName"><%= r.name %></p>
+            <p class="RoomAddress"><%= r.address %></p>
+            <p>☆ ☆ ☆ ☆ ☆</p>
+            <p class="RoomInfo"><%= r.info %></p>
+            <div class="RoomFooter">
+              <p class="RoomPrice">¥<%= r.price %>〜</p>
+              <%= link_to "詳細はこちら", room_path(r), class: "RoomLink" %>
+            </div>
+          </div>
+        </li>
       <% end %>
-    </tbody>
-  </table>
-<% end %>
+    <% else %>
+      <p>検索結果が見つかりませんでした。</p>
+    <% end %>
+  </ul>
+</section>
