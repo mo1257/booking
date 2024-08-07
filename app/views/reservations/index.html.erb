@@ -1,42 +1,41 @@
-<div class="table-responsive">
-    <table class="table align-middle ReservationsTable">
+<section class="container room-list-container">
+  <h2>予約済み一覧</h2>
+  <div>
+    <table class="table align-middle">
       <thead>
         <tr>
           <th>画像</th>
           <th>施設名</th>
           <th>紹介文</th>
-          <th class="text-nowrap">合計料金</th>
-          <th class="text-nowrap">チェックイン</th>
-          <th class="text-nowrap">チェックアウト</th>
-          <th class="text-nowrap">予約確定日時</th>
-          <th></th>
+          <th>合計料金</th>
+          <th>チェックイン</th>
+          <th>チェックアウト</th>
+          <th>予約確定日時</th>
+         
         </tr>
       </thead>
-
       <tbody>
-      <% @reservations.each do |reservation| %>
-        <tr>
-        <td>
-        <% if reservation.room.image.present? %>
-          <%= image_tag reservation.room.image.url, alt: reservation.room.name, size: "100x100" %>
-        <% else %>
-          <%= image_tag "fallback/room.jpg", class: "RoomImage", alt: 'デフォルト画像', size: "100x100" %>
+        <% @reservations.each do |reservation| %>
+          <tr>
+            <td>
+              <% if reservation.room.image.present? %>
+                <%= image_tag reservation.room.image.url, class: "room-image", alt: reservation.room.name, size: "100x100" %>
+              <% else %>
+                <%= image_tag "fallback/room.jpg", class: "room-image", alt: 'デフォルト画像', size: "100x100" %>
+              <% end %>
+            </td>
+            <td class="align-middle">
+              <%= link_to reservation.room.name, room_path(reservation.room) %>
+            </td>
+            <td class="align-middle"><%= reservation.room.description %></td>
+            <td class="align-middle"><%= number_to_currency(reservation.sum_price) %></td>
+            <td class="align-middle"><%= reservation.check_in.strftime('%Y/%m/%d') %></td>
+            <td class="align-middle"><%= reservation.check_out.strftime('%Y/%m/%d') %></td>
+            <td class="align-middle"><%= reservation.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+            
+          </tr>
         <% end %>
-      </td>
-          <td><%= reservation.user.name %></td>
-          <td><%= reservation.room.name %></td>
-          <td><%= reservation.check_in_date %></td>
-          <td><%= reservation.check_out_date %></td>
-          <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
-          <td><%= link_to '表示', reservation %></td>
-          <td><%= link_to '編集', edit_reservation_path(reservation) %></td>
-          <td><%= link_to '削除', reservation, method: :delete, data: { confirm: '本当に削除しますか？' } %></td>
-        </tr>
-      <% end %>
       </tbody>
     </table>
-    <% if @rooms.present? %>
-    <%= link_to '再予約', new_room_reservation_path(@rooms.first), class: "btn btn-primary" %>
-  <% end %>
   </div>
-</div>
+</section>

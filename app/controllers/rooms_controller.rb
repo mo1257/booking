@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
   end
 
   def new
-    @room = current_user.rooms.build
+    @room = current_user.rooms.new
   end
 
   def create

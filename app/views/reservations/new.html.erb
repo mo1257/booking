@@ -27,7 +27,7 @@
 
   <div class="field">
     <%= form.label :people, "人数" %>
-    <%= form.number_field :people %>
+    <%= form.number_field :people, min: 1 %>
   </div>
 
   <div class="field">

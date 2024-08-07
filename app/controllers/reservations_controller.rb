@@ -1,53 +1,84 @@
 class ReservationsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :set_reservation, only: [:show, :edit, :update, :confirmation, :confirm]
 
   # 予約済み一覧
-  def list
   def index
-    @user = current_user
-    @reservations = current_user.reservations
+    @reservations = current_user.reservations.includes(:room)
   end
 
   def new
-    @reservations = Reservation.new
+    @reservation = Reservation.new
   end
 
   def create
-    @rooms = Room.find(params[:reservation][:room_id])
-    @users = current_user.id
-    @reservations = current_user.reservations.new(reservation_params)
-    if @reservations.save
-      redirect_to :reservations
+    @room = Room.find(params[:reservation][:room_id])
+    @reservation = current_user.reservations.new(reservation_params)
+    @reservation.room = @room
+
+    if @reservation.save
+      redirect_to confirmation_reservation_path(@reservation)
     else
-      render 'rooms/show'
+      render 'room/show'
+    end
+  end
+
+  def edit
+    # @reservation is set by before_action
+  end
+
+  def update
+    if @reservation.update(reservation_params)
+      redirect_to @reservation, notice: '予約が更新されました。'
+    else
+      render :edit
     end
   end
 
   # 予約内容確認
   def confirmation
-    @reservations = current_user.reservations.new(reservation_params)
-    @rooms = Room.find(params[:reservation][:room_id])
-    if @reservations.check_in == nil
-      flash[:alert] = "チェックイン日を入れてください"
-      render 'rooms/show' and return
+    @room = @reservation.room
+
+    if @reservation.check_in.nil?
+      flash[:alert] = "チェックイン日を入力してください。"
+      redirect_to edit_reservation_path(@reservation) and return
     end
-    if @reservations.check_out == nil
-      flash[:alert] = "チェックアウト日を入れてください"
-      render 'rooms/show' and return
+
+    if @reservation.check_out.nil?
+      flash[:alert] = "チェックアウト日を入力してください。"
+      redirect_to edit_reservation_path(@reservation) and return
     end
-    if @reservations.check_out < @reservations.check_in
-      flash[:alert] = "終了日は開始日以降の日付にしてください"
-      render 'rooms/show' and return
+
+    if @reservation.check_out < @reservation.check_in
+      flash[:alert] = "チェックアウト日はチェックイン日以降の日付にしてください。"
+      redirect_to edit_reservation_path(@reservation) and return
     end
-    if @reservations.people == nil
-      flash[:alert] = "人数は必須項目です"
-      render 'rooms/show' and return
+
+    if @reservation.people.nil?
+      flash[:alert] = "人数を入力してください。"
+      redirect_to edit_reservation_path(@reservation) and return
     end
-    @reservations.count_day = @reservations.check_out - @reservations.check_in
-    @reservations.sum_price = ( @reservations.count_day * @rooms.room_price ) * @reservations.people
+
+    @reservation.count_day = (@reservation.check_out - @reservation.check_in).to_i
+    @reservation.sum_price = @reservation.count_day * @room.price * @reservation.people
+  end
+
+  def confirm
+    if @reservation.update(confirmed: true, confirmation_date: Time.current)
+      redirect_to @reservation, notice: '予約が確定されました。'
+    else
+      flash[:alert] = "予約の確定に失敗しました。"
+      render :confirmation
+    end
+  end
+
+  private
+
+  def set_reservation
+    @reservation = Reservation.find(params[:id])
   end
 
   def reservation_params
-    params.require(:reservation).permit(:check_in, :check_out, :people, :count_day, :sum_price, :user_id, :room_id)
+    params.require(:reservation).permit(:check_in, :check_out, :people, :room_id)
   end
-
 end
