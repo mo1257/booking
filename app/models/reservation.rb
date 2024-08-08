@@ -9,6 +9,13 @@ class Reservation < ApplicationRecord
   validates :check_out, presence: true
   validates :people, numericality: { only_integer: true, greater_than: 0 }
   
+  # 合計価格を計算するメソッド
+  def sum_price
+    # 宿泊日数を計算
+    num_of_nights = (check_out - check_in).to_i
+    # 合計価格を計算
+    num_of_nights * room.price
+  end
  
 
   validate :check_in_date_cannot_be_in_the_past

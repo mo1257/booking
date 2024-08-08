@@ -4,6 +4,7 @@ class ReservationsController < ApplicationController
 
   # 予約済み一覧
   def index
+    @reservations = Reservation.all
     @reservations = current_user.reservations.includes(:room)
   end
 
@@ -19,7 +20,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to confirmation_reservation_path(@reservation)
     else
-      render 'room/show'
+      render 'rooms/show'
     end
   end
 
@@ -61,6 +62,7 @@ class ReservationsController < ApplicationController
 
     @reservation.count_day = (@reservation.check_out - @reservation.check_in).to_i
     @reservation.sum_price = @reservation.count_day * @room.price * @reservation.people
+    
   end
 
   def confirm

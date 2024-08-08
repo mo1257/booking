@@ -9,14 +9,14 @@ class UsersController < ApplicationController
     @user = current_user
   end
 
-  def profile_edit
+  def edit_profile
     @user = current_user
   end
 
   def update
     @user = current_user
     if @user.update(user_params)
-      redirect_to profile_path, notice: 'プロフィールが更新されました。'
+      redirect_to profile_users_users_path, notice: 'プロフィールが更新されました。'
     else
       render :profile_edit
     end

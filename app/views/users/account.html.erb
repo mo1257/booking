@@ -3,26 +3,28 @@
   <div class="UserContainer">
     <ul class="SideNavigation">
       <li class="SideNavigation__item active">
-        <a href="/user/account">アカウント</a>
+         <%= link_to "アカウント", account_users_path %>
       </li>
 
       <li class="SideNavigation__item ">
-        <a href="/user/profile">プロフィール</a>
+        <%= link_to 'プロフィール', profile_users_path %>
       </li>
     </ul>
 
     <div class="AccountInformation">
       <ul class="TabNavigation">
         <li class="TabNavigation__item active">
-        <a href="/user/account">アカウント</a></li>
+           <%= link_to "アカウント", account_users_path %>
+        </li>
 
         <li class="TabNavigation__item ">
-        <a href="/user/profile">プロフィール</a></li>
+          <%= link_to 'プロフィール', profile_users_path %>
+        </li>
       </ul>
 
       <div class="AccountInformation__header">
         <h3>アカウント</h3>
-        <a class="AccountInformation__link" href="/users/edit">
+        <a class="AccountInformation__link" href="/profile/edit">
         <img alt="編集アイコン" src="https://rails-02-sample.herokuapp.com/assets/icons/edit-blue-51638a3e490277aa2df5f37102d45f5fcdfd8cd6c58fc5add90a958fab5c45af.svg" />
         編集
         </a>

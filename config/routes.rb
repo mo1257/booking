@@ -1,15 +1,15 @@
 Rails.application.routes.draw do
   get 'home/index'
   devise_for :users 
-
+  
   resources :users do
     collection do
       get 'account', to: 'users#account'
-      get 'profile', to: 'users#profile'
-      get 'profile/edit', to: 'users#profile_edit'
-      patch 'profile', to: 'users#update'
-    end
+      get 'profile', to: 'users#profile', as: 'profile'
+      get 'profile/edit', to: 'users#edit_profile', as: 'edit_profile'
+      patch 'profile', to: 'users#update_profile', as: 'update_profile'
   end
+end
 
   root to: 'home#index'
 
