@@ -44,6 +44,11 @@ class ReservationsController < ApplicationController
       flash[:alert] = "チェックイン日を入力してください。"
       redirect_to edit_reservation_path(@reservation) and return
     end
+      
+    if @reservation.check_in > Time.zone.today
+      flash[:alert] = "チェックイン日は本日以降の日付にしてください。"
+      redirect_to edit_reservation_path(@reservation) and return
+    end
 
     if @reservation.check_out.nil?
       flash[:alert] = "チェックアウト日を入力してください。"
@@ -54,6 +59,12 @@ class ReservationsController < ApplicationController
       flash[:alert] = "チェックアウト日はチェックイン日以降の日付にしてください。"
       redirect_to edit_reservation_path(@reservation) and return
     end
+
+    if @reservation.check_in == @reservation.check_out
+      flash[:alert] = "チェックイン日とチェックアウト日は異なる日付にしてください。"
+      redirect_to edit_reservation_path(@reservation) and return
+    end
+    
 
     if @reservation.people.nil?
       flash[:alert] = "人数を入力してください。"

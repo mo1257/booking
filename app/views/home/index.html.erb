@@ -9,9 +9,8 @@
        <%= form_with url: search_rooms_path, method: :get, local: true do %>
         <!-- エリア名の入力フィールド -->
         <%= text_field_tag :area, params[:area], class: "form-control FirstViewSearch__input", placeholder: "エリア名を入力", id: "area" %>
-        
         <!-- 検索ボタン -->
-        <%= submit_tag "検索", class: "btn FirstViewSearch__button", data: { disable_with: "検索" } %>
+         <%= submit_tag "検索", class: "btn FirstViewSearch__button", data: { disable_with: "検索" } %>
       <% end %>
     </div>
   </section>

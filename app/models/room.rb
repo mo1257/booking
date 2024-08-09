@@ -9,14 +9,18 @@ class Room < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :reservations, dependent: :destroy
 
-  def date_before_start
-    return if start_day.blank?
-    errors.add(:start_day, "は今日以降のものを選択してください") if start_day < Date.today
+  def check_in_date_cannot_be_in_the_past
+    if check_in.present? && check_in < Date.today
+      errors.add(:check_in, "は本日以降の日付にしてください。")
+    end
   end
 
-  def date_before_finish
-    return if last_day.blank? || start_day.blank?
-    errors.add(:last_day, "は開始日以降のものを選択してください") if last_day < start_day
+  def check_out_after_check_in
+    return if check_out.blank? || check_in.blank?
+
+    if check_out < check_in
+      errors.add(:check_out, "はチェックイン日以降の日付にしてください。")
+    end
   end
 
 
