@@ -24,7 +24,7 @@ class ReservationsController < ApplicationController
   end
 
   def edit
-    # @reservation is set by before_action
+    # @reservation は before_action で設定されます
   end
 
   def update
@@ -37,6 +37,7 @@ class ReservationsController < ApplicationController
 
   # 予約内容確認
   def confirmation
+
     @room = @reservation.room
 
     if @reservation.check_in.nil?
@@ -54,15 +55,14 @@ class ReservationsController < ApplicationController
       redirect_to edit_reservation_path(@reservation) and return
     end
 
-    if @reservation.check_out <= @reservation.check_in
-      flash[:alert] = "チェックアウト日はチェックイン日以降の日付にしてください。"
-      redirect_to edit_reservation_path(@reservation) and return
-    end
-
-    if @reservation.check_out == @reservation.check_in
-      flash[:alert] = "チェックアウト日はチェックイン日と異なる日付にしてください。"
-      redirect_to edit_reservation_path(@reservation) and return
-    end
+    # チェックアウト日がチェックイン日より前または同じ場合の処理を分ける
+  if @reservation.check_out < @reservation.check_in
+    flash[:alert] = "チェックアウト日はチェックイン日以降の日付にしてください。"
+    redirect_to edit_reservation_path(@reservation) and return
+  elsif @reservation.check_out == @reservation.check_in
+    flash[:alert] = "チェックアウト日はチェックイン日と異なる日付にしてください。"
+    render 'rooms/show' and return
+  end
 
     if @reservation.people.nil?
       flash[:alert] = "人数を入力してください。"
