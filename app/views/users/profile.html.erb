@@ -2,26 +2,23 @@
   <h2>設定</h2>
   <div class="UserContainer">
     <ul class="SideNavigation">
-      <li class="SideNavigation__item ">
-        <a href="/user/account">アカウント</a>
+      <li class="SideNavigation__item <%= 'active' if current_page?(account_users_path) %>">
+        <%= link_to "アカウント", account_users_path %>
       </li>
-
-      <li class="SideNavigation__item active">
-        <a href="/user/profile">プロフィール</a>
+      <li class="SideNavigation__item <%= 'active' if current_page?(profile_users_path) %>">
+        <%= link_to 'プロフィール', profile_users_path,data: { turbolinks: false } %>
       </li>
     </ul>
 
     <div class="AccountInformation">
       <ul class="TabNavigation">
-          <li class="TabNavigation__item ">
-          <a href="/user/account">アカウント</a>
+        <li class="TabNavigation__item <%= 'active' if current_page?(account_users_path) %>">
+          <%= link_to "アカウント", account_users_path %>
         </li>
-
-        <li class="TabNavigation__item active">
-          <a href="/user/profile">プロフィール</a>
+        <li class="TabNavigation__item <%= 'active' if current_page?(profile_users_path) %>">
+          <%= link_to 'プロフィール', profile_users_path,data: { turbolinks: false } %>
         </li>
       </ul>
-
       <div class="AccountInformation__header">
         <h3>プロフィール</h3>
         <a class="AccountInformation__link" href="<%= edit_profile_users_path %>">
@@ -31,11 +28,16 @@
       </div>
 
       <div class="AccountInformation__input-group">
-        <label class="AccountInformation__label" for="image">アイコン画像</label>
-        <p class="AccountInformation__value AccountInformation__value--image">
+      <label class="AccountInformation__label" for="image">アイコン画像</label>
+      <p class="AccountInformation__value AccountInformation__value--image">
+        <% if current_user.avatar.present? %>
+          <%= image_tag current_user.avatar.url, class: "user-avatar", size: "45x45" %>
+        <% else %>
           <%= image_tag "fallback/default.jpg", class: "user-avatar", size: "45x45" %>
-        </p>
-      </div>
+        <% end %>
+      </p>
+    </div>
+    
 
       <div class="AccountInformation__input-group">
         <label class="AccountInformation__label" for="name">名前</label>

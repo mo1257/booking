@@ -6,7 +6,7 @@
         <%= link_to "アカウント", account_users_path %>
       </li>
       <li class="SideNavigation__item <%= 'active' if current_page?(profile_users_path) %>">
-        <%= link_to 'プロフィール', profile_users_path %>
+        <%= link_to 'プロフィール', profile_users_path,data: { turbolinks: false } %>
       </li>
     </ul>
 
@@ -16,7 +16,7 @@
           <%= link_to "アカウント", account_users_path %>
         </li>
         <li class="TabNavigation__item <%= 'active' if current_page?(profile_users_path) %>">
-          <%= link_to 'プロフィール', profile_users_path %>
+          <%= link_to 'プロフィール', profile_users_path,data: { turbolinks: false } %>
         </li>
       </ul>
 
