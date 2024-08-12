@@ -22,10 +22,10 @@ end
     end
 
     resources :reviews, only: [:create, :destroy]
-    resources :reservations, only: [:new, :create]
+    resources :reservations, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :reservations, only: [:index, :show, :edit, :update] do
+  resources :reservations, only: [:index, :show, :edit, :update, :destroy] do
     member do
       get 'confirmation'
       post 'confirm'

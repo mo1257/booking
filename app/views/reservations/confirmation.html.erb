@@ -41,4 +41,4 @@
 
 <%= link_to '予約確定', confirm_reservation_path(@reservation), method: :post, class: 'btn btn-primary' %>
 
-<%= link_to 'キャンセル', reservations_path, class: 'btn btn-danger' %>
+<%= link_to 'キャンセル', reservation_path(@reservation), method: :delete, data: { confirm: '本当にキャンセルしますか？' }, class: 'btn btn-danger' %>

@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_reservation, only: [:show, :edit, :update, :confirmation, :confirm]
+  before_action :set_reservation, only: [:show, :edit, :update, :confirmation, :confirm, :destroy]
 
   # 予約済み一覧
   def index
@@ -82,6 +82,16 @@ class ReservationsController < ApplicationController
       render :confirmation
     end
   end
+
+  def destroy
+    if @reservation.destroy
+      redirect_to reservations_path, notice: '予約をキャンセルしました。'
+    else
+      redirect_to reservations_path, alert: '予約のキャンセルに失敗しました。'
+    end
+  end
+  
+
 
   private
 
