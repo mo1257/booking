@@ -60,28 +60,31 @@ class RoomsController < ApplicationController
     end
     redirect_to rooms_path
   end
-
+  
   def search
-    @q = Room.ransack(params[:q])
     valid_areas = ["東京", "大阪", "京都", "札幌"]
-
+    @q = Room.ransack(params[:q])
+  
     area = params.dig(:q, :address_cont)
-    name = params.dig(:q, :info_cont)
-
-    if area.present?
-      if valid_areas.include?(area)
-        @results = @q.result
-      else
-        @results = Room.none
-        flash[:alert] = "指定されたエリア名は無効です。"
-      end
-    elsif name.present?
-      @results = @q.result
+    name_or_description = params.dig(:q, :name_or_description_cont)
+  
+    if area.present? && valid_areas.include?(area)
+      # エリア検索：指定された有効なエリアに基づいて検索
+      @results = @q.result(distinct: true).where("address LIKE ?", "%#{area}%")
+    elsif area.present? && !valid_areas.include?(area)
+      # エリアが無効な場合は空の結果を返す
+      @results = Room.none
+      flash[:alert] = "指定されたエリア名は無効です。"
+    elsif name_or_description.present?
+      # フリーワード検索：施設名または施設詳細に基づく検索
+      @results = @q.result(distinct: true).where("name LIKE ? OR description LIKE ?", "%#{name_or_description}%", "%#{name_or_description}%")
     else
+      # エリアもフリーワードも指定されていない場合、すべての施設を返す
       @results = Room.all
     end
   end
-
+  
+  
   private
 
   def room_params

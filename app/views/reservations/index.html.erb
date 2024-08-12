@@ -28,7 +28,7 @@
               <%= link_to reservation.room.name, room_path(reservation.room) %>
             </td>
             <td class="align-middle"><%= reservation.room.description %></td>
-            <td class="align-middle"><%= number_to_currency(reservation.sum_price) %></td>
+            <td class="align-middle"><%= reservation.calculate_sum_price %>円</td>
             <td class="align-middle"><%= reservation.check_in.strftime('%Y/%m/%d') %></td>
             <td class="align-middle"><%= reservation.check_out.strftime('%Y/%m/%d') %></td>
             <td class="align-middle"><%= reservation.created_at.strftime('%Y/%m/%d %H:%M') %></td>

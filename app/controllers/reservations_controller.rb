@@ -4,7 +4,6 @@ class ReservationsController < ApplicationController
 
   # 予約済み一覧
   def index
-    @reservations = Reservation.all
     @reservations = current_user.reservations.includes(:room)
   end
 
@@ -55,30 +54,24 @@ class ReservationsController < ApplicationController
       redirect_to edit_reservation_path(@reservation) and return
     end
 
-    if @reservation.check_out < @reservation.check_in
+    if @reservation.check_out <= @reservation.check_in
       flash[:alert] = "チェックアウト日はチェックイン日以降の日付にしてください。"
       redirect_to edit_reservation_path(@reservation) and return
     end
-
-    if @reservation.check_in == @reservation.check_out
-      flash[:alert] = "チェックイン日とチェックアウト日は異なる日付にしてください。"
-      redirect_to edit_reservation_path(@reservation) and return
-    end
-    
 
     if @reservation.people.nil?
       flash[:alert] = "人数を入力してください。"
       redirect_to edit_reservation_path(@reservation) and return
     end
 
-    @reservation.count_day = (@reservation.check_out - @reservation.check_in).to_i
-    @reservation.sum_price = @reservation.count_day * @room.price * @reservation.people
+    @reservation.count_day = @reservation.calculate_count_day
+  @reservation.sum_price = @reservation.calculate_sum_price
     
   end
 
   def confirm
     if @reservation.update(confirmed: true, confirmation_date: Time.current)
-      redirect_to @reservation, notice: '予約が確定されました。'
+      redirect_to reservations_path, notice: '予約が確定されました。'
     else
       flash[:alert] = "予約の確定に失敗しました。"
       render :confirmation
