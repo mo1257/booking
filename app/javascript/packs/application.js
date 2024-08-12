@@ -22,3 +22,6 @@ document.addEventListener("turbolinks:load", function() {
     window.history.replaceState({}, document.title, url.pathname);
   }
 });
+
+
+
