@@ -59,6 +59,11 @@ class ReservationsController < ApplicationController
       redirect_to edit_reservation_path(@reservation) and return
     end
 
+    if @reservation.check_out == @reservation.check_in
+      flash[:alert] = "チェックアウト日はチェックイン日と異なる日付にしてください。"
+      redirect_to edit_reservation_path(@reservation) and return
+    end
+
     if @reservation.people.nil?
       flash[:alert] = "人数を入力してください。"
       redirect_to edit_reservation_path(@reservation) and return
