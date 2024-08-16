@@ -64,10 +64,11 @@ class RoomsController < ApplicationController
   def search
     valid_areas = ["東京", "大阪", "京都", "札幌"]
     @q = Room.ransack(params[:q])
-  
-    area = params.dig(:q, :address_cont)
+
+    # エリアを取得し、パラメータから取得する
+    area = params[:location] || params.dig(:q, :address_cont)
     name_or_description = params.dig(:q, :name_or_description_cont)
-  
+
     if area.present? && valid_areas.include?(area)
       # エリア検索：指定された有効なエリアに基づいて検索
       @results = @q.result(distinct: true).where("address LIKE ?", "%#{area}%")
@@ -83,7 +84,6 @@ class RoomsController < ApplicationController
       @results = Room.all
     end
   end
-  
   
   private
 

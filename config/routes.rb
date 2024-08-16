@@ -20,7 +20,8 @@ end
     collection do
       get 'search'
     end
-
+  get 'search_rooms', to: 'rooms#search', as: 'search_rooms'
+  
     resources :reviews, only: [:create, :destroy]
     resources :reservations, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
