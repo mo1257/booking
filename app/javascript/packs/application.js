@@ -11,3 +11,17 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+// app/javascript/packs/application.js
+
+// 既存のコードの後に追加
+document.addEventListener("turbolinks:load", function() {
+  const url = new URL(window.location);
+  if (url.searchParams.has('refresh')) {
+    url.searchParams.delete('refresh');
+    window.history.replaceState({}, document.title, url.pathname);
+  }
+});
+
+
+

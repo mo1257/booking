@@ -1,0 +1,33 @@
+<!-- app/views/reservations/edit.html.erb -->
+
+<h1>予約の編集</h1>
+<% if @reservation.errors.any? %>
+  <div>
+    <h2>エラーが発生しました:</h2>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<%= form_with(model: @reservation, local: true) do |form| %>
+  <div>
+    <%= form.label :check_in, "チェックイン日" %>
+    <%= form.date_field :check_in %>
+  </div>
+
+  <div>
+    <%= form.label :check_out, "チェックアウト日" %>
+    <%= form.date_field :check_out %>
+  </div>
+
+  <div>
+    <%= form.label :people, "人数" %>
+    <%= form.number_field :people %>
+  </div>
+
+  <div>
+    <%= form.submit '更新' %>
+  </div>
+<% end %>

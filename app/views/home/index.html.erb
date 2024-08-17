@@ -1,0 +1,73 @@
+<div class="FirstView">
+  <section class="container">
+    <h2 class="FirstView__title">
+      HotelBookingで<br>
+      まだ体験したことのない<br>
+      旅をしよう
+    </h2>
+    <div class="FirstViewSearch">
+  <%= search_form_for @q, url: search_rooms_path, method: :get, local: true do |form| %>
+    <!-- エリア名の入力フィールド -->
+    <div class="form-group">
+      <%= form.label :address_cont, "エリア検索" %>
+      <%= form.text_field :address_cont, value: params.dig(:q, :address_cont), placeholder: "エリア名を入力", class: "form-control FirstViewSearch__input" %>
+    </div>
+    
+    <!-- 検索ボタン -->
+    <%= form.submit "検索", class: "btn FirstViewSearch__button", data: { disable_with: "検索中..." } %>
+  <% end %>
+</div>
+
+
+  </section>
+</div>
+
+<div class="container">
+  <section class="RecommendAreaSection">
+    <h2 class="RecommendAreaSection__title">
+      おすすめのエリア
+    </h2>
+
+    <div class="RecommendAreas">
+  <a class="RecommendArea RecommendArea--tokyo" href="<%= search_rooms_path(location: '東京') %>">
+    <span class="RecommendArea__name RecommendArea__name--ja">東京</span>
+    <span class="RecommendArea__name RecommendArea__name--en">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+      </svg>
+      Tokyo
+    </span>
+  </a>
+
+  <a class="RecommendArea RecommendArea--osaka" href="<%= search_rooms_path(location: '大阪') %>">
+  <span class="RecommendArea__name RecommendArea__name--ja">大阪</span>
+  <span class="RecommendArea__name RecommendArea__name--en">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+      <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+    </svg>
+    Osaka
+  </span>
+</a>
+
+<a class="RecommendArea RecommendArea--kyoto" href="<%= search_rooms_path(location: '京都') %>">
+<span class="RecommendArea__name RecommendArea__name--ja">京都</span>
+<span class="RecommendArea__name RecommendArea__name--en">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+  </svg>
+  Kyoto
+</span>
+</a>
+
+<a class="RecommendArea RecommendArea--sapporo" href="<%= search_rooms_path(location: '札幌') %>">
+<span class="RecommendArea__name RecommendArea__name--ja">札幌</span>
+<span class="RecommendArea__name RecommendArea__name--en">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+    <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+  </svg>
+  Sapporo
+</span>
+</a>
+  </div>
+  </section>
+</div>  

@@ -1,0 +1,58 @@
+<!-- app/views/rooms/edit.html.erb -->
+
+<div class="outer-container">
+  <div class="container">
+    <h1>施設の編集</h1>
+
+    <%= form_with(model: @room, local: true) do |form| %>
+      <% if @room.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+          <ul>
+            <% @room.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description %>
+      </div>
+
+      <div class="field">
+        <%= form.label :price %>
+        <%= form.number_field :price %>
+      </div>
+
+      <div class="field">
+        <%= form.label :address %>
+        <%= form.text_field :address %>
+      </div>
+
+      <div class="field">
+        <%= form.label :image, "施設画像" %>
+        <%= form.file_field :image %>
+        <% if @room.image.present? %>
+          <div>
+            <%= image_tag @room.image.url, size: "100x100", alt: "現在の画像" %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="actions">
+        <%= form.submit "更新" %>
+      </div>
+    <% end %>
+
+    <%= link_to '戻る', room_path(@room) %>
+  </div>
+</div>
+
+

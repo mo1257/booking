@@ -1,0 +1,37 @@
+<!-- app/views/rooms/index.html.erb -->
+
+<h1>登録済み一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>施設詳細</th>
+      <th>宿泊料金（/日）</th>
+      <th>作成日</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td>
+        <% if room.image.present? %>
+      <%= image_tag room.image.url, class: "room-image", alt: room.name, size: "100x100" %>
+       <% else %>
+      <%= image_tag "fallback/room.jpg", class: "room-image", alt: 'デフォルト画像', size: "100x100" %>
+       <% end %>   
+        </td>
+        <td><%= link_to room.name, room %></td>
+        <td><%= room.description %></td>
+        <td><%= room.price %></td>
+        <td><%= room.created_at.to_s(:custom) %></td>
+        <td>
+          <%= link_to '編集', edit_room_path(room) %>
+          <%= link_to "削除", room, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,44 @@
+<!-- app/views/reservations/confirmation.html.erb -->
+
+<h1>予約確認</h1>
+
+<p>以下の予約内容を確認してください。</p>
+
+<p>
+  <strong>ユーザー:</strong>
+  <%= @reservation.user.name %>
+</p>
+
+<p>
+  <strong>施設:</strong>
+  <%= @reservation.room.name %>
+</p>
+
+<p>
+  <strong>チェックイン日:</strong>
+  <%= @reservation.check_in.strftime('%Y/%m/%d') %>
+</p>
+
+<p>
+  <strong>チェックアウト日:</strong>
+  <%= @reservation.check_out.strftime('%Y/%m/%d') %>
+</p>
+
+<p>
+  <strong>人数:</strong>
+  <%= @reservation.people %>
+</p>
+
+<p>
+  <strong>宿泊日数:</strong>
+  <%= @reservation.count_day %>日
+</p>
+
+<p>
+  <strong>合計金額:</strong>
+  <%= number_to_currency(@reservation.sum_price) %>
+</p>
+
+<%= link_to '予約確定', confirm_reservation_path(@reservation), method: :post, class: 'btn btn-primary' %>
+
+<%= link_to 'キャンセル', reservation_path(@reservation), method: :delete, data: { confirm: '本当にキャンセルしますか？' }, class: 'btn btn-danger' %>

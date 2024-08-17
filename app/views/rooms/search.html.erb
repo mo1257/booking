@@ -1,0 +1,41 @@
+<div class="RoomDetailContainer">
+  <form class="SearchRoomsForm">
+    <%= search_form_for @q, url: search_rooms_path, method: :get do |f| %>
+      <div class="SearchRoomsForm__input-group--area">
+        <%= f.search_field :address_cont, class: "SearchRoomsForm__input", placeholder: 'エリア名を入力' %>
+      </div>
+      <div>
+        <%= f.search_field :info_cont, class: "SearchRoomsForm__input", placeholder: 'キーワード名を入力' %>
+      </div>
+      <%= f.submit '検索', class: "SearchRoomsForm__button Button FirstViewSerchButton" %>
+    <% end %>
+  </form>
+</div>
+
+<section class="RoomsContainer">
+  <ul class="RoomList">
+    <% if @results.present? %>
+      <% @results.each do |r| %>
+        <li class="Room">
+          <% if r.image.present? %>
+            <%= image_tag r.image.url, class: "RoomImage" %>
+          <% else %>
+            <%= image_tag "fallback/room.jpg", class: "RoomImage", alt: 'デフォルト画像' %>
+          <% end %>
+          <div class="RoomBody">
+            <p class="RoomName"><%= r.name %></p>
+            <p class="RoomAddress"><%= r.address %></p>
+            <p>☆ ☆ ☆ ☆ ☆</p>
+            <p class="RoomInfo"><%= r.info %></p>
+            <div class="RoomFooter">
+              <p class="RoomPrice">¥<%= r.price %>〜</p>
+              <%= link_to "詳細はこちら", room_path(r), class: "RoomLink" %>
+            </div>
+          </div>
+        </li>
+      <% end %>
+    <% else %>
+      <p>検索結果が見つかりませんでした。</p>
+    <% end %>
+  </ul>
+</section>
